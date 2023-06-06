@@ -4,6 +4,8 @@ from django.conf import settings
 from django.shortcuts import redirect, render, redirect
 from django.urls import reverse
 from urllib.parse import quote_plus, urlencode
+import jwt
+from profiles.models import Profile
 
 oauth = OAuth()
 
@@ -25,9 +27,20 @@ def login(request):
 
 
 def callback(request):
+
     token = oauth.auth0.authorize_access_token(request)
     request.session["user"] = token
-    return redirect(request.build_absolute_uri(reverse("index")))
+
+
+
+    email = token.get('userinfo')['email']
+    nickname = token.get('userinfo')['nickname']
+    existing_profile = Profile.objects.filter(email=email).first()
+    if not existing_profile:
+        profile = Profile(email=email, nickname=nickname)
+        profile.save()
+
+    return redirect(reverse("index"))
 
 
 def logout(request):
