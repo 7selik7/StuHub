@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'StuHub'
+    'StuHub',
+    'profiles',
+    'orders',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -57,7 +60,9 @@ ROOT_URLCONF = 'StuHub.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        "DIRS": [TEMPLATE_DIR],
+        "DIRS": [os.path.join(TEMPLATE_DIR, 'accounts'),
+                 os.path.join(TEMPLATE_DIR, 'orders'),
+                 os.path.join(TEMPLATE_DIR, 'profiles')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
