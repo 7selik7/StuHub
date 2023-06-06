@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d444f47d-bed2-4fcf-b7cd-870297345aad" name="Changes" comment="" />
+    <list default="true" id="d444f47d-bed2-4fcf-b7cd-870297345aad" name="Changes" comment="Create Project">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,10 +26,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="8e9b288e-3323-4dcd-9bde-87afc3f621c9" />
+        <option name="url" value="https://github.com/7selik7/StuHub.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2QmvPGBaMt13510kqaNS7Lha8gI" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -45,6 +62,7 @@
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
+      "sqlite",
       "mysql"
     ]
   }
@@ -63,7 +81,17 @@
       <workItem from="1685987607214" duration="4136000" />
       <workItem from="1686000327048" duration="1511000" />
       <workItem from="1686001862313" duration="1054000" />
+      <workItem from="1686002940813" duration="1551000" />
+      <workItem from="1686035763890" duration="3237000" />
     </task>
+    <task id="LOCAL-00001" summary="Create Project">
+      <created>1686003106122</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1686003106122</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -72,5 +100,9 @@
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
     <option featureType="com.intellij.fileTypeFactory" implementationName="requirements.txt" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Create Project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create Project" />
   </component>
 </project>
