@@ -1,11 +1,11 @@
 import json
 from authlib.integrations.django_client import OAuth
 from django.conf import settings
-from django.shortcuts import redirect, render, redirect
 from django.urls import reverse
+from django.shortcuts import render, redirect
 from urllib.parse import quote_plus, urlencode
-import jwt
 from profiles.models import Profile
+from django.urls import reverse_lazy
 
 oauth = OAuth()
 
@@ -22,16 +22,15 @@ oauth.register(
 
 def login(request):
     return oauth.auth0.authorize_redirect(
-        request, request.build_absolute_uri(reverse("callback"))
+        request, request.build_absolute_uri(reverse_lazy("accounts:callback"))
     )
+
 
 
 def callback(request):
 
     token = oauth.auth0.authorize_access_token(request)
     request.session["user"] = token
-
-
 
     email = token.get('userinfo')['email']
     nickname = token.get('userinfo')['nickname']
