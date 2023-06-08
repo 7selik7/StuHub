@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path ,include
+from django.urls import path, include
 
 import accounts
 from accounts import views
@@ -7,9 +7,8 @@ from accounts import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("accounts/", accounts.views.index, name="index"),
-    path("accounts/login", views.login, name="login"),
-    path("accounts/logout", views.logout, name="logout"),
-    path("accounts/callback", views.callback, name="callback"),
+    path("", accounts.views.index, name="index"),
+    path("accounts/", include('accounts.urls')),
     path('profiles/', include('profiles.urls')),
+    path('orders/', include('orders.urls'))
 ]
