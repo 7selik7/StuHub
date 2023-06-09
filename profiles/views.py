@@ -1,10 +1,8 @@
+from .models import Profile
+from orders.models import Order
 from django.shortcuts import render
 from profiles.models import Profile
-from .models import Profile
 
-
-
-from django.shortcuts import render
 
 def profile(request, profile_id):
     try:
@@ -16,3 +14,8 @@ def profile(request, profile_id):
         return render(request, 'profiles/profile.html', context)
     except Profile.DoesNotExist:
         return render(request, 'profiles/profile_not_found.html')
+
+
+def home(request):
+    orders = Order.objects.all()
+    return render(request, 'home.html', {'orders': orders})
