@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from urllib.parse import quote_plus, urlencode
 from profiles.models import Profile
 from django.urls import reverse_lazy
+from django.utils import timezone
 
 oauth = OAuth()
 
@@ -33,7 +34,7 @@ def callback(request):
     nickname = userinfo['nickname']
     existing_profile = Profile.objects.filter(email=email).first()
     if not existing_profile:
-        profile = Profile(email=email, nickname=nickname)
+        profile = Profile(email=email, nickname=nickname, registration_time=timezone.now().date())
         profile.save()
     else:
         profile = existing_profile
