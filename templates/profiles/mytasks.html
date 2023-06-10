@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>My tasks</title>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 <body>
 
     <div class="main">
-        <div class="orders">
+       <div class="orders">
         {% if orders %}
             {% for order in orders %}
             <div class="my_orders">
@@ -23,7 +23,7 @@
             </div>
             {% endfor %}
         {% else %}
-            <p>Нема замовлень</p>
+            <p>Нема завдань</p>
         {% endif %}
         </div>
         <div class="nav_info">

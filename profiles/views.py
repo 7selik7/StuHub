@@ -40,3 +40,16 @@ def myorders(request):
         return render(request, 'myorders.html', {'orders': orders, 'name': name, 'nickname': nickname, 'picture': picture})
     else:
         return redirect('/')
+
+
+def mytasks(request):
+    userinfo = request.session.get("user") if request.session.get("user") else None
+    if userinfo:
+        user_id = userinfo.get("id")
+        name = userinfo.get("name")
+        nickname = userinfo.get("nickname")
+        picture = userinfo.get("picture")
+        orders = Order.objects.filter(dev_id=user_id)
+        return render(request, 'myorders.html', {'orders': orders, 'name': name, 'nickname': nickname, 'picture': picture})
+    else:
+        return redirect('/')

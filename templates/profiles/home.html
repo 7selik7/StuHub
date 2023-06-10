@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>My orders</title>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 <body>
@@ -29,7 +29,7 @@
             <a href="{% url 'profiles:home' %}">Всі завдання</a>
             <a href="{% url 'orders:create_order' %}">Створити завдання</a>
             <a href="{% url 'profiles:myorders' %}">Мої завдання</a>
-            <a href="{% url 'profiles:home' %}">Мої закази</a>
+            <a href="{% url 'profiles:mytasks' %}">Мої закази</a>
             <a href="{% url 'accounts:logout' %}">Вийти</a>
         </div>
     </div>
