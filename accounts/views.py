@@ -27,14 +27,23 @@ def login(request):
 
 def callback(request):
     token = oauth.auth0.authorize_access_token(request)
-    request.session["user"] = token
+    userinfo = token.get('userinfo')
 
-    email = token.get('userinfo')['email']
-    nickname = token.get('userinfo')['nickname']
+    email = userinfo['email']
+    nickname = userinfo['nickname']
     existing_profile = Profile.objects.filter(email=email).first()
     if not existing_profile:
         profile = Profile(email=email, nickname=nickname)
         profile.save()
+    else:
+        profile = existing_profile
+
+    profile_id = profile.id
+
+    userinfo = {'id': profile_id, **userinfo}
+    token['userinfo'] = userinfo
+
+    request.session["user"] = token['userinfo']
 
     return redirect('/profiles/home')
 

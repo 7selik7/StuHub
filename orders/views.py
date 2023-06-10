@@ -14,7 +14,7 @@ def create_order(request):
         form = OrderForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
-            order.user_id = 1
+            order.user_id = request.session["user"]['id']
             order.dev_id = 0
             order.status = 0
             order.save()
