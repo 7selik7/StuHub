@@ -5,7 +5,9 @@ app_name = 'profiles'
 
 
 urlpatterns = [
-    path('<int:profile_id>/', views.profile, name='profile'),
     path('home/', views.home, name='home'),
+    path('myorders/', views.myorders, name='myorders'),
+    path('mytasks/', views.mytasks, name='mytasks'),
+    path('<str:profile_name>/', views.profile, name='profile'),
 ]
 

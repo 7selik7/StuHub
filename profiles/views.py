@@ -1,12 +1,12 @@
 from .models import Profile
 from orders.models import Order
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from profiles.models import Profile
 
 
-def profile(request, profile_id):
+def profile(request, profile_name):
     try:
-        user_profile = Profile.objects.get(id=profile_id)
+        user_profile = Profile.objects.get(nickname=profile_name)
         context = {
             'profile': user_profile,
             'name': user_profile.nickname
@@ -18,4 +18,38 @@ def profile(request, profile_id):
 
 def home(request):
     orders = Order.objects.all()
-    return render(request, 'home.html', {'orders': orders})
+
+    userinfo = request.session.get("user") if request.session.get("user") else None
+    if userinfo:
+        name = userinfo.get("name")
+        nickname = userinfo.get("nickname")
+        picture = userinfo.get("picture")
+        return render(request, 'home.html', {'orders': orders, 'name': name, 'nickname': nickname, 'picture': picture})
+    else:
+        return redirect('/')
+
+
+def myorders(request):
+    userinfo = request.session.get("user") if request.session.get("user") else None
+    if userinfo:
+        user_id = userinfo.get("id")
+        name = userinfo.get("name")
+        nickname = userinfo.get("nickname")
+        picture = userinfo.get("picture")
+        orders = Order.objects.filter(user_id=user_id)
+        return render(request, 'myorders.html', {'orders': orders, 'name': name, 'nickname': nickname, 'picture': picture})
+    else:
+        return redirect('/')
+
+
+def mytasks(request):
+    userinfo = request.session.get("user") if request.session.get("user") else None
+    if userinfo:
+        user_id = userinfo.get("id")
+        name = userinfo.get("name")
+        nickname = userinfo.get("nickname")
+        picture = userinfo.get("picture")
+        orders = Order.objects.filter(dev_id=user_id)
+        return render(request, 'myorders.html', {'orders': orders, 'name': name, 'nickname': nickname, 'picture': picture})
+    else:
+        return redirect('/')

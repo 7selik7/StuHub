@@ -1,4 +1,3 @@
-import json
 from authlib.integrations.django_client import OAuth
 from django.conf import settings
 from django.urls import reverse
@@ -26,20 +25,27 @@ def login(request):
     )
 
 
-
 def callback(request):
-
     token = oauth.auth0.authorize_access_token(request)
-    request.session["user"] = token
+    userinfo = token.get('userinfo')
 
-    email = token.get('userinfo')['email']
-    nickname = token.get('userinfo')['nickname']
+    email = userinfo['email']
+    nickname = userinfo['nickname']
     existing_profile = Profile.objects.filter(email=email).first()
     if not existing_profile:
         profile = Profile(email=email, nickname=nickname)
         profile.save()
+    else:
+        profile = existing_profile
 
-    return redirect(reverse("index"))
+    profile_id = profile.id
+
+    userinfo = {'id': profile_id, **userinfo}
+    token['userinfo'] = userinfo
+
+    request.session["user"] = token['userinfo']
+
+    return redirect('/profiles/home')
 
 
 def logout(request):
@@ -58,11 +64,4 @@ def logout(request):
 
 
 def index(request):
-    return render(
-        request,
-        "index.html",
-        context={
-            "session": request.session.get("user"),
-            "pretty": json.dumps(request.session.get("user"), indent=4),
-        },
-    )
+    return render(request, "index.html")
