@@ -1,4 +1,3 @@
-import json
 from authlib.integrations.django_client import OAuth
 from django.conf import settings
 from django.urls import reverse
@@ -26,9 +25,7 @@ def login(request):
     )
 
 
-
 def callback(request):
-
     token = oauth.auth0.authorize_access_token(request)
     request.session["user"] = token
 
@@ -39,7 +36,7 @@ def callback(request):
         profile = Profile(email=email, nickname=nickname)
         profile.save()
 
-    return redirect(reverse("index"))
+    return redirect('/profiles/home')
 
 
 def logout(request):
@@ -58,11 +55,4 @@ def logout(request):
 
 
 def index(request):
-    return render(
-        request,
-        "index.html",
-        context={
-            "session": request.session.get("user"),
-            "pretty": json.dumps(request.session.get("user"), indent=4),
-        },
-    )
+    return render(request, "index.html")

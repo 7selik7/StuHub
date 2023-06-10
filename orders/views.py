@@ -15,10 +15,10 @@ def create_order(request):
         if form.is_valid():
             order = form.save(commit=False)
             order.user_id = 1
-            order.dev_id = 0  # Начальное значение dev_id
-            order.status = 0  # Начальное значение status
+            order.dev_id = 0
+            order.status = 0
             order.save()
-            return redirect('index')  # Перенаправление на главную страницу после успешного сохранения заказа
+            return redirect('/profiles/home')
     else:
         form = OrderForm()
 
