@@ -1,0 +1,54 @@
+body{
+  margin: 0;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/static/img/image 5.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.my_icon{
+  position: absolute;
+  width: 117px;
+  height: 35px;
+  left: 263px;
+  top: 37px;
+}
+
+.my_btns{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.my_login{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px;
+  width: 335px;
+  height: 44px;
+  background: #DADDE4;
+  opacity: 0.8;
+  box-shadow: -9px -7px 19px #FFFFFF, 7px 9px 13px rgba(129, 128, 128, 0.8);
+  border-radius: 27px;
+
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.005em;
+  color: #7F7F81;
+}
+
