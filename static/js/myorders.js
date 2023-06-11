@@ -26,10 +26,10 @@ function showToast(message) {
 }
 
 let csrfToken = getCookie('csrftoken');
-let executeButtons = document.getElementsByClassName("execute-btn");
+let deleteButtons = document.getElementsByClassName("delete-btn");
 
-for (let i = 0; i < executeButtons.length; i++) {
-    executeButtons[i].addEventListener("click", function() {
+for (let i = 0; i < deleteButtons.length; i++) {
+    deleteButtons[i].addEventListener("click", function() {
         let orderId = this.getAttribute("data-order-id");
 
         let confirmationModal = new bootstrap.Modal(document.getElementById("confirmation-modal"));
@@ -40,7 +40,7 @@ for (let i = 0; i < executeButtons.length; i++) {
 
         let confirmHandler = function() {
             let xhr = new XMLHttpRequest();
-            xhr.open("POST", "/orders/execute_order/" + orderId + "/", true);
+            xhr.open("DELETE", "/orders/delete_order/" + orderId + "/", true);
             xhr.setRequestHeader("X-CSRFToken", csrfToken);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
