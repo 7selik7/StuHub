@@ -1,7 +1,9 @@
+from django.http import JsonResponse
 from .models import Profile
 from orders.models import Order
 from django.shortcuts import render, redirect
 from profiles.models import Profile
+from django.shortcuts import get_object_or_404
 
 
 def profile(request, profile_name):
@@ -37,7 +39,8 @@ def myorders(request):
         nickname = userinfo.get("nickname")
         picture = userinfo.get("picture")
         orders = Order.objects.filter(user_id=user_id)
-        return render(request, 'myorders.html', {'orders': orders, 'name': name, 'nickname': nickname, 'picture': picture})
+        return render(request, 'myorders.html',
+                      {'orders': orders, 'name': name, 'nickname': nickname, 'picture': picture})
     else:
         return redirect('/')
 
@@ -50,6 +53,10 @@ def mytasks(request):
         nickname = userinfo.get("nickname")
         picture = userinfo.get("picture")
         orders = Order.objects.filter(dev_id=user_id)
-        return render(request, 'myorders.html', {'orders': orders, 'name': name, 'nickname': nickname, 'picture': picture})
+        return render(request, 'myorders.html',
+                      {'orders': orders, 'name': name, 'nickname': nickname, 'picture': picture})
     else:
         return redirect('/')
+
+
+

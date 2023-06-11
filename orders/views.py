@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django import forms
 from .models import Order
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
 
 class OrderForm(forms.ModelForm):
@@ -24,3 +26,11 @@ def create_order(request):
 
     context = {'form': form}
     return render(request, 'create_order.html', context)
+
+
+def execute_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    order.dev_id = request.session.get("user")['id']
+    order.save()
+
+    return JsonResponse({'message': 'Заказ успешно выполнен'})
