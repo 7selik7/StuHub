@@ -64,3 +64,15 @@ for (let i = 0; i < deleteButtons.length; i++) {
         cancelBtn.addEventListener("click", cancelHandler);
     });
 }
+
+window.addEventListener("DOMContentLoaded", function () {
+    var descriptions = document.getElementsByClassName("description-hover");
+    for (var i = 0; i < descriptions.length; i++) {
+        descriptions[i].addEventListener("mouseover", function () {
+            this.style.height = this.scrollHeight + "px";
+        });
+        descriptions[i].addEventListener("mouseout", function () {
+            this.style.height = "1.5em";
+        });
+    }
+});
