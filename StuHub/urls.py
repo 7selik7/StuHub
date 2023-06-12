@@ -10,5 +10,6 @@ urlpatterns = [
     path("", accounts.views.index, name="index"),
     path("accounts/", include('accounts.urls')),
     path('profiles/', include('profiles.urls')),
-    path('orders/', include('orders.urls'))
+    path('orders/', include('orders.urls')),
+    path("chat/", include("chat.urls")),
 ]
