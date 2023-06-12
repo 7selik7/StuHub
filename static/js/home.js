@@ -1,35 +1,35 @@
 function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
             }
         }
-        return cookieValue;
     }
+    return cookieValue;
+}
 
 function showToast(message) {
-  Toastify({
-    text: message,
-    duration: 3000,
-    close: true,
-    gravity: "top",
-    position: "center",
-    backgroundColor: "#7F7F81",
-    stopOnFocus: true,
-  }).showToast();
+    Toastify({
+        text: message,
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "#7F7F81",
+        stopOnFocus: true,
+    }).showToast();
 }
 
 let csrfToken = getCookie('csrftoken');
 let executeButtons = document.getElementsByClassName("execute-btn");
 
 for (let i = 0; i < executeButtons.length; i++) {
-    executeButtons[i].addEventListener("click", function() {
+    executeButtons[i].addEventListener("click", function () {
         let orderId = this.getAttribute("data-order-id");
 
         let confirmationModal = new bootstrap.Modal(document.getElementById("confirmation-modal"));
@@ -38,14 +38,14 @@ for (let i = 0; i < executeButtons.length; i++) {
         let confirmBtn = document.getElementById("confirm-btn");
         let cancelBtn = document.getElementById("cancel-btn");
 
-        let confirmHandler = function() {
+        let confirmHandler = function () {
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "/orders/execute_order/" + orderId + "/", true);
             xhr.setRequestHeader("X-CSRFToken", csrfToken);
-            xhr.onreadystatechange = function() {
+            xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
-                  let response = JSON.parse(xhr.responseText);
-                  showToast(response.message);
+                    let response = JSON.parse(xhr.responseText);
+                    showToast(response.message);
                 }
             };
             xhr.send();
@@ -55,7 +55,7 @@ for (let i = 0; i < executeButtons.length; i++) {
             confirmBtn.removeEventListener("click", confirmHandler);
         };
 
-        let cancelHandler = function() {
+        let cancelHandler = function () {
             confirmationModal.hide();
             confirmBtn.removeEventListener("click", confirmHandler);
         };
@@ -64,3 +64,17 @@ for (let i = 0; i < executeButtons.length; i++) {
         cancelBtn.addEventListener("click", cancelHandler);
     });
 }
+
+
+window.addEventListener("DOMContentLoaded", function () {
+    var descriptions = document.getElementsByClassName("description-hover");
+    for (var i = 0; i < descriptions.length; i++) {
+        descriptions[i].addEventListener("mouseover", function () {
+            this.style.height = this.scrollHeight + "px";
+        });
+        descriptions[i].addEventListener("mouseout", function () {
+            this.style.height = "1.5em";
+        });
+    }
+});
+

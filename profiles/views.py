@@ -19,10 +19,10 @@ def profile(request, profile_name):
 
 
 def home(request):
-    orders = Order.objects.filter(dev_id=0)
-
     userinfo = request.session.get("user") if request.session.get("user") else None
     if userinfo:
+        id = userinfo.get('id')
+        orders = Order.objects.filter(dev_id=0).exclude(user_id=id)
         name = userinfo.get("name")
         nickname = userinfo.get("nickname")
         picture = userinfo.get("picture")
@@ -53,9 +53,7 @@ def mytasks(request):
         nickname = userinfo.get("nickname")
         picture = userinfo.get("picture")
         orders = Order.objects.filter(dev_id=user_id)
-        return render(request, 'mytasks.html', {'orders': orders, 'name': name, 'nickname': nickname, 'picture': picture})
+        return render(request, 'mytasks.html',
+                      {'orders': orders, 'name': name, 'nickname': nickname, 'picture': picture})
     else:
         return redirect('/')
-
-
-
