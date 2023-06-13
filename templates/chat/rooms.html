@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Rooms</title>
+</head>
+<body>
+    <h1>ROOMS</h1>
+    <ul>
+        {% for chat in chats %}
+        <li><a href="/chat/{{ chat.name }}/">{{ chat.name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

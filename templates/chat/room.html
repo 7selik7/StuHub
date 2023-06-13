@@ -3,9 +3,55 @@
 <head>
     <meta charset="utf-8"/>
     <title>Chat Room</title>
+    <style>
+        .message {
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .message .sender {
+            font-weight: bold;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .message .content {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            max-width: 70%;
+        }
+
+        .message.sent .sender {
+            text-align: right;
+            margin-left: auto;
+        }
+
+        .message.sent .content {
+            background-color: #D3D3D3;
+            float: right;
+        }
+
+        .message.received .sender {
+            text-align: left;
+            margin-right: auto;
+        }
+
+        .message.received .content {
+            background-color: #F5F5F5;
+            float: left;
+        }
+    </style>
 </head>
 <body>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+    <div id="chat-log-container">
+        {% for message in messages %}
+            <div class="message {% if message.sender_name == username %}sent{% else %}received{% endif %}">
+                <span class="sender {% if message.sender_name == username %}sent{% else %}received{% endif %}">{{ message.sender_name }}:</span>
+                <span class="content">{{ message.content }}</span>
+            </div>
+        {% endfor %}
+    </div>
     <input id="chat-message-input" type="text" size="100"><br>
     <input id="chat-message-submit" type="button" value="Send">
     {{ room_name|json_script:"room-name" }}
@@ -40,7 +86,8 @@
             const messageInputDom = document.querySelector('#chat-message-input');
             const message = messageInputDom.value;
             chatSocket.send(JSON.stringify({
-                'message': message
+                'message': message,
+                'sender_name': "{{ username }}"
             }));
             messageInputDom.value = '';
         };
