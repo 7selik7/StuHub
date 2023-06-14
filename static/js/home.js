@@ -40,7 +40,7 @@ for (let i = 0; i < executeButtons.length; i++) {
 
         let confirmHandler = function () {
             let xhr = new XMLHttpRequest();
-            xhr.open("POST", "/orders/execute_order/" + orderId + "/", true);
+            xhr.open("POST", "/orders/make_chat/" + orderId + "/", true);
             xhr.setRequestHeader("X-CSRFToken", csrfToken);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {

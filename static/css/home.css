@@ -15,6 +15,9 @@
     width: 60%;
 }
 
+.main-content{
+    width: 60%;
+}
 .nav_info{
     display: flex;
     width: 40%;

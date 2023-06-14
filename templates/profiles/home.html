@@ -36,7 +36,7 @@
                 <td>{{ order.type }}</td>
                 <td>{{ order.status }}</td>
                 <td>
-                    <button class="execute-btn" data-order-id="{{ order.id }}">Виконати</button>
+                    <button class="execute-btn" data-order-id="{{ order.id }}">Відгукнутися</button>
                 </td>
             </tr>
         {% endfor %}
@@ -52,6 +52,7 @@
         <a href="{% url 'orders:create_order' %}">Створити завдання</a>
         <a href="{% url 'profiles:myorders' %}">Мої завдання</a>
         <a href="{% url 'profiles:mytasks' %}">Мої закази</a>
+        <a href='/profiles/chat'>Мої чати</a>
         <a href="{% url 'accounts:logout' %}">Вийти</a>
     </div>
 </div>
@@ -66,7 +67,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Ви дійсно хочете виконати замовлення?</p>
+                <p>Ви дійсно хочете відгукнутись на замовлення?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="cancel-btn" data-bs-dismiss="modal">Відміна</button>
