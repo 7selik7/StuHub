@@ -33,6 +33,9 @@ ALLOWED_HOSTS = [
 ]
 
 INSTALLED_APPS = [
+    'daphne',
+    'chat',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +47,18 @@ INSTALLED_APPS = [
     'orders',
     'accounts'
 ]
+#!!!!!!!!!!!!!!localhost???
+# Daphne
+ASGI_APPLICATION = "StuHub.asgi.application"
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -62,7 +77,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         "DIRS": [os.path.join(TEMPLATE_DIR, 'accounts'),
                  os.path.join(TEMPLATE_DIR, 'orders'),
-                 os.path.join(TEMPLATE_DIR, 'profiles')],
+                 os.path.join(TEMPLATE_DIR, 'profiles'),
+                 os.path.join(TEMPLATE_DIR, 'chat')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
