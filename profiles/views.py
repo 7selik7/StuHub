@@ -3,6 +3,7 @@ from .models import Profile
 from orders.models import Order
 from django.shortcuts import render, redirect
 from profiles.models import Profile
+from chat.models import Chat
 from django.shortcuts import get_object_or_404
 
 
@@ -55,5 +56,17 @@ def mytasks(request):
         orders = Order.objects.filter(dev_id=user_id)
         return render(request, 'mytasks.html',
                       {'orders': orders, 'name': name, 'nickname': nickname, 'picture': picture})
+    else:
+        return redirect('/')
+
+
+def chat(request):
+    userinfo = request.session.get("user") if request.session.get("user") else None
+    if userinfo:
+        name = userinfo.get("name")
+        nickname = userinfo.get("nickname")
+        picture = userinfo.get("picture")
+        chats = Chat.objects.all()
+        return render(request, 'chat.html', {'chats': chats, 'name': name, 'nickname': nickname, 'picture': picture})
     else:
         return redirect('/')

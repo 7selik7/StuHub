@@ -3,29 +3,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My tasks</title>
+    <title>Chat</title>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
 </head>
 <body>
 
     <div class="main">
-       <div class="orders">
-        {% if orders %}
-            {% for order in orders %}
-            <div class="my_orders">
-                <h2>{{ order.subject }}</h2>
-                <p>{{ order.description }}</p>
-                <p>{{ order.deadline }}</p>
-                <p>{{ order.price }}</p>
-                <p>{{ order.type }}</p>
-                <p>{{ order.status }}</p>
-                <button>Виконати</button>
-            </div>
-            {% endfor %}
-        {% else %}
-            <p>Нема завдань</p>
-        {% endif %}
+        <div class="main-content">
+        {% for chat in chats %}
+            <a href="/chat/{{ chat.name }}/">{{ chat.name }}</a>
+        {% endfor %}
         </div>
+
         <div class="nav_info">
             <img src="{{ picture }}" alt="User Picture" width="100" height="100">
             <h3>Welcome, {{ name }}</h3>
@@ -38,5 +30,11 @@
             <a href="{% url 'accounts:logout' %}">Вийти</a>
         </div>
     </div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'js/home.js' %}"></script>
 </body>
 </html>
